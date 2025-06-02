@@ -2,7 +2,7 @@
 $servername = "mysql_db"; // <- ESTE ES EL CAMBIO IMPORTANTE
 $username = "user";
 $password = "password";
-$dbname = "libreria";
+$dbname = "librosdb";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
