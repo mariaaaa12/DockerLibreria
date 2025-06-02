@@ -3,35 +3,25 @@ version: '3.8'
 services:
   web:
     build: .
-    container_name: libreria_web
+    container_name: php_app
     ports:
       - "8080:80"
     volumes:
-      - ./app:/var/www/html
+      - .:/var/www/html
     depends_on:
       - db
-    networks:
-      - libreria_net
 
   db:
     image: mysql:5.7
-    container_name: libreria_db
+    container_name: mysql_db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: libreria
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: librosdb
       MYSQL_USER: user
-      MYSQL_PASSWORD: password
-    ports:
-      - "3306:3306"
+      MYSQL_PASSWORD: userpass
     volumes:
       - db_data:/var/lib/mysql
-      - ./db/libreria.sql:/docker-entrypoint-initdb.d/libreria.sql
-    networks:
-      - libreria_net
 
 volumes:
   db_data:
-
-networks:
-  libreria_net:
