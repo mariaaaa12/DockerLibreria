@@ -1,14 +1,20 @@
-# Usa una imagen base de Apache con PHP
-FROM php:8.2-apache
+# Imagen base con PHP y Apache
+FROM php:7.4-apache
 
-# Copia los archivos de tu app al contenedor
-COPY ./app/ /var/www/html/
-
-# Habilita módulos necesarios (si usas MySQL)
+# Habilitar extensiones necesarias (por ejemplo para MySQL)
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Da permisos a la carpeta
-RUN chown -R www-data:www-data /var/www/html
+# Copiar archivos al directorio raíz de Apache
+COPY . /var/www/html/
 
-# Puerto 80 expuesto por Apache
+# Dar permisos apropiados
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+
+# Habilitar mod_rewrite si lo necesitas
+RUN a2enmod rewrite
+
+# Configuración opcional para .htaccess
+# Si usas .htaccess, agrega esto:
+# RUN sed -i 's/AllowOverride None/AllowOverride All/g' /etc/apache2/apache2.conf
+
 EXPOSE 80
