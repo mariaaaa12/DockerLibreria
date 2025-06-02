@@ -1,5 +1,5 @@
 <?php
-$servername = "db"; // <- ESTE ES EL CAMBIO IMPORTANTE
+$servername = "mysql_db"; // <- ESTE ES EL CAMBIO IMPORTANTE
 $username = "user";
 $password = "password";
 $dbname = "libreria";
